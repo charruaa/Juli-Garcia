@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Sistema de Gestion (Antognazza, Martinez)</h1>
+    <h2>Manejo de influencers</h2>
+    <h3> Alta de influencer</h3>
+    <input type="submit" value ="Agregar influencer">
+    <h3>Datos del influencer a agregar</h3>
+    <h3>Influencer</h3>
+    <form>
+        <label>Nombre:</label>
+        <input type="text">
+        <label>Mail:</label>
+        <input type="email">
+        <label>% Comision</label>
+        <input type="number" min="0" max="100">
+        <input type="button" value="Cancelar">
+        <input type="submit" value="Agregar">
+    </form>
+    <h3> Tabala de influencers</h3>
+    <table>
+        <tr>
+            <th><input type="button" value="Nombre ↑↓" onclick = "ordenarPorNombre()"></th>
+            <th> Email </th>
+            <th> % Comision </th>
+            <th> Total a cobrar</th>
+            <th> Etiquetas</th>
+            <th> Detalle</th>
+        </tr>
+    </table>
+    
+</body>
+</html>
