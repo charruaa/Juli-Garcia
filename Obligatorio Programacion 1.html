@@ -9,292 +9,201 @@
 <body>
     <h1>Sistema de Gestión (Antognazza, Martinez)</h1>
 
-    <h2>Manejo de influencers</h2>
-<<<<<<< HEAD
-=======
-    <h3> Alta de influencer</h3>
-    <input type="submit" value ="Agregar influencer">
-    <h3>Datos del influencer a agregar</h3>
-    <h3>Influencer</h3>
-    <form>
-        <label>Nombre:</label>
-        <input type="text">
-        <label>Mail:</label>
-        <input type="email">
-        <label>% Comisión</label>
-        <input type="number" min="0" max="100">
-        <input type="button" value="Cancelar">
-        <input type="submit" value="Agregar">
-    </form>
-    <h3> Tabla de influencers</h3>
-    <table>
-        <thead>
-            <tr>
-                 <th><input type="button" value="Nombre ↑↓"></th>
-                 <th> Email </th>
-                 <th> % Comision </th>
-                 <th> Total a cobrar</th>
-                 <th> Etiquetas</th>
-                 <th> Detalle</th>
-            </tr>
-        </thead>
->>>>>>> 7b7ba8787cf52156ece29996ce549aabc9285d32
+    <section class="grupo">
+        <h2>Manejo de influencers</h2>
 
-    <section>
-        <h3>Alta de influencer</h3>
-        <input type="submit" value="Agregar influencer">
+        <section>
+            <h3>Alta de influencer</h3>
+            <input type="submit" value="Agregar influencer">
+        </section>
+
+        <section>
+            <h3>Datos del influencer a agregar</h3>
+            <h3>Influencer</h3>
+            <form>
+                <label>Nombre:</label>
+                <input type="text">
+                <label>Mail:</label>
+                <input type="email">
+                <label>% Comisión</label>
+                <input type="number" min="0" max="100">
+                <input type="button" value="Cancelar">
+                <input type="submit" value="Agregar">
+            </form>
+        </section>
+
+        <section>
+            <h3>Tabla de influencers</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="button" value="Nombre ↑↓"></th>
+                        <th>Email</th>
+                        <th>% Comision</th>
+                        <th>Total a cobrar</th>
+                        <th>Etiquetas</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ana Perez</td>
+                        <td>ana.perez@email.com</td>
+                        <td>20%</td>
+                        <td>$600</td>
+                        <td>🔥🟢</td>
+                        <td><input type="button" value="ventas"></td>
+                    </tr>
+                    <tr>
+                        <td>Juan Gomez</td>
+                        <td>juan.gomez@email.com</td>
+                        <td>10%</td>
+                        <td>$20</td>
+                        <td></td>
+                        <td><input type="button" value="ventas"></td>
+                    </tr>
+                    <tr>
+                        <td>Lucia Martinez</td>
+                        <td>lucia.martinez@email.com</td>
+                        <td>95%</td>
+                        <td>$0</td>
+                        <td>🧊</td>
+                        <td><input type="button" value="ventas"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Informacion: 🔥 Top comision (cobra más $) 🧊 Cero ventas 🟢 Venta mas cara (mayor monto en una sola venta)</p>
+        </section>
     </section>
 
-    <section>
-        <h3>Datos del influencer a agregar</h3>
-        <h3>Influencer</h3>
-        <form>
-            <label>Nombre:</label>
-            <input type="text">
-            <label>Mail:</label>
-            <input type="email">
-            <label>% Comisión</label>
-            <input type="number" min="0" max="100">
-            <input type="button" value="Cancelar">
-            <input type="submit" value="Agregar">
-        </form>
+    <section class="grupo">
+        <h2>Manejo de Articulos</h2>
+
+        <section>
+            <h3>Alta de articulo</h3>
+            <input type="submit" value="Agregar articulo">
+        </section>
+
+        <section>
+            <h3>Datos del articulo a agregar</h3>
+            <h4>Articulo</h4>
+            <form>
+                <label>Codigo</label>
+                <input type="text">
+                <label>Descripción</label>
+                <input type="text">
+                <label>Precio</label>
+                <input type="number" min="0">
+                <input type="button" value="Cancelar">
+                <input type="submit" value="Agregar">
+            </form>
+        </section>
+
+        <section>
+            <h3>Tabla de articulos</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th><input type="button" value="Codigo↑↓"></th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A001 ⭐</td>
+                        <td>Remera algodon basica</td>
+                        <td>$1000</td>
+                    </tr>
+                    <tr>
+                        <td>A002</td>
+                        <td>Zapatillas deportivas</td>
+                        <td>$300</td>
+                    </tr>
+                    <tr>
+                        <td>A003</td>
+                        <td>Gorra ajustable</td>
+                        <td>$500</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>Informacion: ⭐ Articulo mas vendido (mayor cantidad de unidades vendidas)</p>
+        </section>
     </section>
 
-    <section>
-        <h3>Tabla de influencers</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th><input type="button" value="Nombre ↑↓"></th>
-                    <th>Email</th>
-                    <th>% Comision</th>
-                    <th>Total a cobrar</th>
-                    <th>Etiquetas</th>
-                    <th>Detalle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Ana Perez</td>
-                    <td>ana.perez@email.com</td>
-                    <td>20%</td>
-                    <td>$600</td>
-                    <td>🔥🟢</td>
-                    <td><input type="button" value="ventas"></td>
-                </tr>
-                <tr>
-                    <td>Juan Gomez</td>
-                    <td>juan.gomez@email.com</td>
-                    <td>10%</td>
-                    <td>$20</td>
-                    <td></td>
-                    <td><input type="button" value="ventas"></td>
-                </tr>
-                <tr>
-                    <td>Lucia Martinez</td>
-                    <td>lucia.martinez@email.com</td>
-                    <td>95%</td>
-                    <td>$0</td>
-                    <td>🧊</td>
-                    <td><input type="button" value="ventas"></td>
-                </tr>
-            </tbody>
-        </table>
-        <p>Informacion: 🔥 Top comision (cobra más $) 🧊 Cero ventas 🟢 Venta mas cara (mayor monto en una sola venta)</p>
-    </section>
+    <section class="grupo">
+        <h2>Ventas</h2>
 
-    <h2>Manejo de Articulos</h2>
+        <section>
+            <h3>Alta de ventas</h3>
+            <input type="button" value="Agregar venta">
+        </section>
 
-<<<<<<< HEAD
-    <section>
-        <h3>Alta de articulo</h3>
-        <input type="submit" value="Agregar articulo">
-    </section>
-=======
-    <p1> Información: 🔥Top comisión (cobra más $) 🧊 Cero ventas 🟢 Venta mas cara (mayor monto en una sola venta) </p1>
->>>>>>> 7b7ba8787cf52156ece29996ce549aabc9285d32
+        <section>
+            <h3>Datos de la venta a agregar</h3>
+            <h4>Venta</h4>
+            <form>
+                <label>Nro: 3 Artículo</label>
+                <select>
+                    <option value="A001">A001</option>
+                    <option value="A002">A002</option>
+                    <option value="A003">A003</option>
+                </select>
+                <label>Influencer</label>
+                <select>
+                    <option value="Ana Perez">Ana Perez</option>
+                    <option value="Juan Gomes">Juan Gomes</option>
+                    <option value="Lucia Martinez">Lucia Martinez</option>
+                </select>
+                <label>Cantidad</label>
+                <input type="number" min="0">
+                <label>Medio</label>
+                <select>
+                    <option value="1-Instagram">1-Instagram</option>
+                    <option value="2-Youtube">2-Youtube</option>
+                </select>
+                <input type="button" value="Cancelar">
+                <input type="button" value="Agregar">
+            </form>
+        </section>
 
-    <section>
-        <h3>Datos del articulo a agregar</h3>
-        <h4>Articulo</h4>
-        <form>
-            <label>Codigo</label>
-            <input type="text">
-            <label>Descripción</label>
-            <input type="text">
-            <label>Precio</label>
-            <input type="number" min="0">
-            <input type="button" value="Cancelar">
-            <input type="submit" value="Agregar">
-        </form>
-    </section>
+        <section>
+            <h3>Tabla de ventas (ordenada por número de venta)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nro Venta</th>
+                        <th>Codigo de Articulo</th>
+                        <th>Nombre de influencer</th>
+                        <th>Cantidad</th>
+                        <th>Medio</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>A001</td>
+                        <td>Ana Pérez</td>
+                        <td>3</td>
+                        <td>1 - Instagram</td>
+                        <td><input type="button" value="❌"></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>A002</td>
+                        <td>Juan Gómez</td>
+                        <td>1</td>
+                        <td>2 - YouTube</td>
+                        <td><input type="button" value="❌"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
 
-<<<<<<< HEAD
-    <section>
-        <h3>Tabla de articulos</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th><input type="button" value="Codigo↑↓"></th>
-                    <th>Descripcion</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>A001 ⭐</td>
-                    <td>Remera algodon basica</td>
-                    <td>$1000</td>
-                </tr>
-                <tr>
-                    <td>A002</td>
-                    <td>Zapatillas deportivas</td>
-                    <td>$300</td>
-                </tr>
-                <tr>
-                    <td>A003</td>
-                    <td>Gorra ajustable</td>
-                    <td>$500</td>
-                </tr>
-            </tbody>
-        </table>
-        <p>Informacion: ⭐ Articulo mas vendido (mayor cantidad de unidades vendidas)</p>
-    </section>
-
-    <h2>Ventas</h2>
-
-    <section>
-        <h3>Alta de ventas</h3>
-        <input type="button" value="Agregar venta">
-    </section>
-=======
-    <form>
-        <label>Codigo </label>
-        <input type="text">
-        <label>Descripción</label>
-        <input type="text">
-        <label>Precio</label>
-        <input type="number" min="0">
-        <input type="button" value="Cancelar">
-        <input type="submit" value="Agregar">
-    </form>
-    
-    <h3> Tabla de articulos </h3>
-    <table>
-        <thead> 
-            <tr>
-                <th><input type = "button" value= "Codigo↑↓"> </th>
-                <th> Descripcion </th>
-                <th> Precio </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr> 
-                <td>A001 ⭐ </td>
-                <td>Remera algodón básica</td>
-                <td>$ 1000</td>
-            </tr>
-            <tr>
-                <td>A002</td>
-                <td>Zapatillas deportivas</td>
-                <td>$ 300</td>
-            </tr>
-            
-            <tr>
-                <td>A003</td>
-                <td>Gorra ajustable</td>
-                <td>$ 500</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <p> Información: ⭐ Artículo más vendido (mayor cantidad de unidades vendidas) </p>
-
-    <h2>Ventas</h2>
-    <h3> Alta de ventas</h3>
-    <input type = "button" value = "Agregar venta">
-    <h3>Datos de la venta a agregar</h3>
-    <h4>Venta</h4>
-    <form>
-        <label> Nro: 3 Artículo </label>
-        <select>
-            <option value="A001"> A001</option>
-            <option value="A002"> A002</option>
-            <option value="A003"> A003</option>
-        </select>
-
-        <label> Influencer </label>
-        <select>
-            <option value="Ana Pérez"> Ana Pérez</option>
-            <option value="Juan Gómez"> Juan Gómez</option>
-            <option value="Lucía Martínez"> Lucía Martínez</option>
-        </select>
->>>>>>> 7b7ba8787cf52156ece29996ce549aabc9285d32
-
-    <section>
-        <h3>Datos de la venta a agregar</h3>
-        <h4>Venta</h4>
-        <form>
-            <label>Nro: 3 Artículo</label>
-            <select>
-                <option value="A001">A001</option>
-                <option value="A002">A002</option>
-                <option value="A003">A003</option>
-            </select>
-            <label>Influencer</label>
-            <select>
-                <option value="Ana Perez">Ana Perez</option>
-                <option value="Juan Gomes">Juan Gomes</option>
-                <option value="Lucia Martinez">Lucia Martinez</option>
-            </select>
-            <label>Cantidad</label>
-            <input type="number" min="0">
-            <label>Medio</label>
-            <select>
-                <option value="1-Instagram">1-Instagram</option>
-                <option value="2-Youtube">2-Youtube</option>
-            </select>
-            <input type="button" value="Cancelar">
-            <input type="button" value="Agregar">
-        </form>
-    </section>
-
-    <section>
-        <h3>Tabla de ventas (ordenada por número de venta)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nro Venta</th>
-                    <th>Codigo de Articulo</th>
-                    <th>Nombre de influencer</th>
-                    <th>Cantidad</th>
-                    <th>Medio</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>A001</td>
-                    <td>Ana Pérez</td>
-                    <td>3</td>
-                    <td>1 - Instagram</td>
-                    <td><input type="button" value="❌"></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>A002</td>
-                    <td>Juan Gómez</td>
-                    <td>1</td>
-                    <td>2 - YouTube</td>
-                    <td><input type="button" value="❌"></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <section>
-        <h3>Gráfico de burbujas</h3>
+        <section>
+            <h3>Gráfico de burbujas</h3>
+        </section>
     </section>
 
 </body>
