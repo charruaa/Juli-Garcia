@@ -14,14 +14,14 @@ section.grupo > section {
     background-color: #F2F2F2;
     border-radius: 8px;
     padding: 12px;
-    margin: 16px 250px 16px 0;
+    margin: 16px 220px 16px 24px;
 }
 
 input[type="button"], input[type="submit"] {
     background-color: #0EA5B7;
     color: white;
     border: none;
-    padding: 16px 34px;
+    padding: 12px 36px;
     font-size: 11px;
     border-radius: 12px;
     cursor: pointer;
@@ -55,4 +55,19 @@ td {
 
 label {
     margin-right: 40px;
+}
+
+td:has(input[type="button"]), th:has(input[type="button"]) {
+    padding: 4px;
+}
+
+td input[type="button"], th input[type="button"] {
+    width: 100%;
+    display: block;
+    padding: 14px 24px;
+    border-radius: 8px;
+}
+
+.label-gap {
+    margin-left: 32px;
 }
