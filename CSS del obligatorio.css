@@ -14,7 +14,7 @@ section.grupo > section {
     background-color: #F2F2F2;
     border-radius: 8px;
     padding: 12px;
-    margin: 16px 220px 16px 24px;
+    margin: 16px 220px 16px 50px;
 }
 
 input[type="button"], input[type="submit"] {
@@ -70,4 +70,8 @@ td input[type="button"], th input[type="button"] {
 
 .label-gap {
     margin-left: 32px;
+}
+
+section.grupo > h2 {
+    margin-left: 50px;
 }
