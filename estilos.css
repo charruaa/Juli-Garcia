@@ -21,7 +21,7 @@ section.grupo > section {
     margin: 16px 220px 16px 50px;
 }
 
-input[type="button"], input[type="submit"] {
+button {
     background-color: #0EA5B7;
     color: white;
     border: none;
@@ -31,7 +31,7 @@ input[type="button"], input[type="submit"] {
     cursor: pointer;
 }
 
-input[type="button"]:hover, input[type="submit"]:hover {
+button:hover {
     background-color: #0c8fa0;
 }
 
@@ -61,11 +61,11 @@ label {
     margin-right: 40px;
 }
 
-td:has(input[type="button"]), th:has(input[type="button"]) {
+td:has(button), th:has(button) {
     padding: 4px;
 }
 
-td input[type="button"], th input[type="button"] {
+td button, th button {
     width: 100%;
     display: block;
     padding: 14px 24px;
