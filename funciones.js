@@ -57,6 +57,26 @@ function renderizarInfluencers(){
 
 function ingresoArticulo(){
     document.getElementById("tablaArticulo").showModal()
+    let codigo = document.getElementById("codigo-articulo").value.trim()
+    let descripcion = document.getElementById("descripcion-articulo").value.trim()
+    let precio = parseFloat(document.getElementById("precio-articulo").value)
+
+    if(codigo === "" || descripcion === "" || isNaN(precio)){
+        alert("Por favor completá todos los campos.")
+        return
+    }
+
+    let nuevoArticulo = new articulo(codigo, descripcion, precio)
+    articulos.push(nuevoArticulo)
+    guardarArticulo()
+
+    document.getElementById("codigo-articulo").value = ""
+    document.getElementById("descripcion-articulo").value = ""
+    document.getElementById("precio-articulo").value = ""
+
+    document.getElementById("tablaArticulo").close()
+}
+
 }
 function cerrarArticulo(){
     document.getElementById("tablaArticulo").close()
