@@ -5,5 +5,14 @@ class Influencer{
         this.comision=comision
     }
 }
-
 let influencers = []
+
+class articulo{
+    constructor (codigo,descripcion,precio){
+        this.codigo=codigo
+        this.descripcion=descripcion
+        this.precio=precio
+    }
+}
+
+let articulos = []
