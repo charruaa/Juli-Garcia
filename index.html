@@ -51,7 +51,7 @@
                         <th>Detalle</th>
                     </tr>
                 </thead>
-                <tbody id="influencers-body">
+                <tbody id="influencersTabla">
                 </tbody>
             </table>
             <p>Información: 🔥 Top comisión (cobra más $) 🧊 Cero ventas 🟢 Venta más cara (mayor monto en una sola venta)</p>
@@ -91,22 +91,7 @@
                         <th>Precio</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>A001 ⭐</td>
-                        <td>Remera algodón básica</td>
-                        <td>$ 1000</td>
-                    </tr>
-                    <tr>
-                        <td>A002</td>
-                        <td>Zapatillas deportivas</td>
-                        <td>$ 300</td>
-                    </tr>
-                    <tr>
-                        <td>A003</td>
-                        <td>Gorra ajustable</td>
-                        <td>$ 500</td>
-                    </tr>
+                <tbody id="articulosTabla">
                 </tbody>
             </table>
             <p>Información: ⭐ Artículo más vendido (mayor cantidad de unidades vendidas)</p>
@@ -125,7 +110,7 @@
             <h3>Datos de la venta a agregar</h3>
             <h4>Venta</h4>
             <form>
-                <label>Nro: 3 <span class="label-gap">Artículo:</span></label>
+                <label>Nro: <span id="nro-venta">3</span> <span class="label-gap">Artículo:</span></label>
                 <select id="articulo-venta">
                     <option value="A001">A001</option>
                     <option value="A002">A002</option>
@@ -163,23 +148,7 @@
                         <th>Acción</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>A001</td>
-                        <td>Ana Pérez</td>
-                        <td>3</td>
-                        <td>1 - Instagram</td>
-                        <td><button type="button" id="eliminar-venta-1" data-venta-id="1">❌</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>A002</td>
-                        <td>Juan Gómez</td>
-                        <td>1</td>
-                        <td>2 - YouTube</td>
-                        <td><button type="button" id="eliminar-venta-2" data-venta-id="2">❌</button></td>
-                    </tr>
+                <tbody id="ventasTabla">
                 </tbody>
             </table>
         </section>

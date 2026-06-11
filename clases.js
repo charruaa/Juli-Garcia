@@ -1,4 +1,4 @@
-class Influencer{
+class influencer{
     constructor(nombre,mail,comision){
         this.nombre=nombre
         this.mail=mail
@@ -16,3 +16,15 @@ class articulo{
 }
 
 let articulos = []
+
+class venta {
+    constructor(numero, codigoArticulo, nombreInfluencer, cantidad, medio){
+        this.numero = numero
+        this.codigoArticulo = codigoArticulo
+        this.nombreInfluencer = nombreInfluencer
+        this.cantidad = cantidad
+        this.medio = medio
+    }
+}
+
+let ventas = []

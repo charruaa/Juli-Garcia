@@ -26,9 +26,9 @@ function agregarInfluencer(){
         return
     }
 
-    let nuevoInfluencer = new Influencer(nombre, mail, comision)
+    let nuevoInfluencer = new influencer(nombre, mail, comision)
     influencers.push(nuevoInfluencer)
-    renderizarInfluencers()
+    guardarInfluencers()
 
     document.getElementById("nombre-influencer").value = ""
     document.getElementById("mail-influencer").value = ""
@@ -37,9 +37,9 @@ function agregarInfluencer(){
     document.getElementById("tablaInfluencer").close()
 }
 
-function renderizarInfluencers(){
-    let tbody = document.getElementById("influencers-body")
-    tbody.innerHTML = ""
+function guardarInfluencers(){
+    let tInf = document.getElementById("influencersTabla")
+    tInf.innerHTML = ""
     for(let i = 0; i < influencers.length; i++){
         let inf = influencers[i]
         let fila = document.createElement("tr")
@@ -51,13 +51,18 @@ function renderizarInfluencers(){
             <td></td>
             <td></td>
         `
-        tbody.appendChild(fila)
+        tInf.appendChild(fila)
     }
 }
 
 function ingresoArticulo(){
     document.getElementById("tablaArticulo").showModal()
-    let codigo = document.getElementById("codigo-articulo").value.trim()
+}
+function cerrarArticulo(){
+    document.getElementById("tablaArticulo").close()
+}
+function agregarArticulo(){
+ let codigo = document.getElementById("codigo-articulo").value.trim()
     let descripcion = document.getElementById("descripcion-articulo").value.trim()
     let precio = parseFloat(document.getElementById("precio-articulo").value)
 
@@ -68,7 +73,7 @@ function ingresoArticulo(){
 
     let nuevoArticulo = new articulo(codigo, descripcion, precio)
     articulos.push(nuevoArticulo)
-    guardarArticulo()
+    guardarArticulos()
 
     document.getElementById("codigo-articulo").value = ""
     document.getElementById("descripcion-articulo").value = ""
@@ -76,23 +81,68 @@ function ingresoArticulo(){
 
     document.getElementById("tablaArticulo").close()
 }
-
+function guardarArticulos(){
+    let tArt = document.getElementById("articulosTabla")
+    tArt.innerHTML = ""
+    for(let i = 0; i < articulos.length; i++){
+        let inf = articulos[i]
+        let fila = document.createElement("tr")
+        fila.innerHTML = `
+            <td>${inf.codigo}</td>
+            <td>${inf.descripcion}</td>
+            <td>$${inf.precio}</td>
+        `
+        tArt.appendChild(fila)
+    }
 }
-function cerrarArticulo(){
-    document.getElementById("tablaArticulo").close()
-}
-function agregarArticulo(){
-
-    document.getElementById("tablaArticulo").close()
-}
-
 function ingresoVenta(){
+    document.getElementById("nro-venta").textContent = contadorVenta
     document.getElementById("tablaVenta").showModal()
 }
 function cerrarVenta(){
     document.getElementById("tablaVenta").close()
 }
 function agregarVenta(){
+    let codigoArticulo = document.getElementById("articulo-venta").value
+    let nombreInfluencer = document.getElementById("influencer-venta").value
+    let cantidad = parseInt(document.getElementById("cantidad-venta").value)
+    let medio = document.getElementById("medio-venta").value
 
+    if(isNaN(cantidad) || cantidad <= 0){
+        alert("Por favor completá todos los campos.")
+        return
+    }
+
+    let nuevaVenta = new venta(contadorVenta, codigoArticulo, nombreInfluencer, cantidad, medio)
+    ventas.push(nuevaVenta)
+    contadorVenta++
+    guardarVentas()
+
+    document.getElementById("cantidad-venta").value = ""
     document.getElementById("tablaVenta").close()
 }
+
+function guardarVentas(){
+    let tVen = document.getElementById("ventasTabla")
+    tVen.innerHTML = ""
+    for(let i = 0; i < ventas.length; i++){
+        let v = ventas[i]
+        let fila = document.createElement("tr")
+        fila.innerHTML = `
+            <td>${v.numero}</td>
+            <td>${v.codigoArticulo}</td>
+            <td>${v.nombreInfluencer}</td>
+            <td>${v.cantidad}</td>
+            <td>${v.medio}</td>
+            <td><button type="button" onclick="eliminarVenta(${v.numero})">❌</button></td>
+        `
+        tVen.appendChild(fila)
+    }
+}
+
+function eliminarVenta(numero){
+    ventas = ventas.filter(v => v.numero !== numero)
+    guardarVentas()
+}
+
+guardarVentas()
