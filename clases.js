@@ -28,3 +28,4 @@ class venta {
 }
 
 let ventas = []
+let contadorVenta = 1

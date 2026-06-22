@@ -56,11 +56,16 @@ function guardarInfluencers(){
         let v = ventas[i]
         let art = null
         for (let j = 0; j < articulos.length; j++) {
-            if (articulos[j].codigo === v.codigoArticulo) { art = articulos[j]; break }
+            if (articulos[j].codigo === v.codigoArticulo) { 
+                art = articulos[j]; break 
+            }
         }
         let inf = null
         for (let j = 0; j < influencers.length; j++) {
-            if (influencers[j].nombre === v.nombreInfluencer) { inf = influencers[j]; break }
+            if (influencers[j].nombre === v.nombreInfluencer) { 
+                inf = influencers[j];
+                break
+                }
         }
         if (art && inf && stats[inf.nombre] !== undefined) {
             let monto = v.cantidad * art.precio
@@ -92,10 +97,34 @@ function guardarInfluencers(){
             <td>${inf.comision}%</td>
             <td>$${s.totalCobrar.toFixed(2)}</td>
             <td>${etiquetas}</td>
-            <td></td>
+            <td><button type="button" onclick="ventasInfluencer('${inf.nombre}')">Ver</button></td>
         `
         tInf.appendChild(fila)
     }
+}
+function ventasInfluencer(nombre){
+    let inf = null
+    for (let j = 0; j < influencers.length; j++) {
+        if (influencers[j].nombre === nombre) { inf = influencers[j]; break }
+    }
+
+    let ventasIndividuales = ""
+    for (let i = 0; i < ventas.length; i++){
+        let v = ventas[i]
+        if (v.nombreInfluencer === nombre){
+            let art = null
+            for (let j = 0; j < articulos.length; j++) {
+                if (articulos[j].codigo === v.codigoArticulo) { art = articulos[j]; break }
+            }
+            let precio = art ? art.precio : 0
+            let totalPlata = v.cantidad * precio
+            let comision = inf ? inf.comision : 0
+            ventasIndividuales += `\nNro ${v.numero} → Cant: ${v.cantidad} → Art: ${v.codigoArticulo} → $${precio} | Total: $${totalPlata.toFixed(2)} | Comisión: $${(totalPlata * comision / 100).toFixed(2)}`
+        }
+    }
+
+    if (ventasIndividuales === "") ventasIndividuales = "Sin ventas registradas."
+    alert(ventasIndividuales)
 }
 
 function ingresoArticulo(){
@@ -153,6 +182,24 @@ function guardarArticulos(){
     }
 }
 function ingresoVenta(){
+    let selectArticulo = document.getElementById("articulo-venta")
+    selectArticulo.innerHTML = ""
+    for (let i = 0; i < articulos.length; i++) {
+        let opt = document.createElement("option")
+        opt.value = articulos[i].codigo
+        opt.textContent = articulos[i].codigo + " - " + articulos[i].descripcion
+        selectArticulo.appendChild(opt)
+    }
+
+    let selectInfluencer = document.getElementById("influencer-venta")
+    selectInfluencer.innerHTML = ""
+    for (let i = 0; i < influencers.length; i++) {
+        let opt = document.createElement("option")
+        opt.value = influencers[i].nombre
+        opt.textContent = influencers[i].nombre
+        selectInfluencer.appendChild(opt)
+    }
+
     document.getElementById("nro-venta").textContent = contadorVenta
     document.getElementById("tablaVenta").showModal()
 }
