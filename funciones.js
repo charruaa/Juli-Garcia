@@ -15,6 +15,8 @@ document.getElementById("orden-articulos").addEventListener("click", ordenarArti
 
 let ordenInfluencersAsc = true
 let ordenArticulosAsc = true
+let sortInfluencersActivo = false
+let sortArticulosActivo = false
 
 function ingresoInfluencer(){
     document.getElementById("tablaInfluencer").showModal()
@@ -32,15 +34,21 @@ function agregarInfluencer(){
         return
     }
 
+    for (let i = 0; i < influencers.length; i++) {
+        if (influencers[i].nombre === nombre) {
+            alert("Ya existe un influencer con ese nombre.")
+            return
+        }
+    }
+
     let nuevoInfluencer = new influencer(nombre, mail, comision)
     influencers.push(nuevoInfluencer)
+    if (sortInfluencersActivo) aplicarSortInfluencers()
     guardarInfluencers()
 
     document.getElementById("nombre-influencer").value = ""
     document.getElementById("mail-influencer").value = ""
     document.getElementById("comision-influencer").value = ""
-
-    document.getElementById("tablaInfluencer").close()
 }
 
 function guardarInfluencers(){
@@ -97,7 +105,7 @@ function guardarInfluencers(){
             <td>${inf.comision}%</td>
             <td>$${s.totalCobrar.toFixed(2)}</td>
             <td>${etiquetas}</td>
-            <td><button type="button" onclick="ventasInfluencer('${inf.nombre}')">Ver</button></td>
+            <td><button type="button" onclick="ventasInfluencer('${inf.nombre}')">Ventas</button></td>
         `
         tInf.appendChild(fila)
     }
@@ -108,7 +116,7 @@ function ventasInfluencer(nombre){
         if (influencers[j].nombre === nombre) { inf = influencers[j]; break }
     }
 
-    let ventasIndividuales = ""
+    let ventasIndividuales = "Ventas:"
     for (let i = 0; i < ventas.length; i++){
         let v = ventas[i]
         if (v.nombreInfluencer === nombre){
@@ -119,11 +127,11 @@ function ventasInfluencer(nombre){
             let precio = art ? art.precio : 0
             let totalPlata = v.cantidad * precio
             let comision = inf ? inf.comision : 0
-            ventasIndividuales += `\nNro ${v.numero} → Cant: ${v.cantidad} → Art: ${v.codigoArticulo} → $${precio} | Total: $${totalPlata.toFixed(2)} | Comisión: $${(totalPlata * comision / 100).toFixed(2)}`
+            ventasIndividuales += `\nNro ${v.numero} → ${v.cantidad} → ${v.codigoArticulo} → $${precio}c/u  Total: $${totalPlata.toFixed(2)} → Comisión: $${(totalPlata * comision / 100).toFixed(2)}`
         }
     }
 
-    if (ventasIndividuales === "") ventasIndividuales = "Sin ventas registradas."
+    if (ventasIndividuales === "Ventas:") ventasIndividuales += "\nsin datos"
     alert(ventasIndividuales)
 }
 
@@ -143,15 +151,21 @@ function agregarArticulo(){
         return
     }
 
+    for (let i = 0; i < articulos.length; i++) {
+        if (articulos[i].codigo === codigo) {
+            alert("Ya existe un artículo con ese código.")
+            return
+        }
+    }
+
     let nuevoArticulo = new articulo(codigo, descripcion, precio)
     articulos.push(nuevoArticulo)
+    if (sortArticulosActivo) aplicarSortArticulos()
     guardarArticulos()
 
     document.getElementById("codigo-articulo").value = ""
     document.getElementById("descripcion-articulo").value = ""
     document.getElementById("precio-articulo").value = ""
-
-    document.getElementById("tablaArticulo").close()
 }
 function guardarArticulos(){
     let tArt = document.getElementById("articulosTabla")
@@ -174,8 +188,8 @@ function guardarArticulos(){
         let estrella = (maxUnidades > 0 && unidades[art.codigo] === maxUnidades) ? " ⭐" : ""
         let fila = document.createElement("tr")
         fila.innerHTML = `
-            <td>${art.codigo}</td>
-            <td>${art.descripcion}${estrella}</td>
+            <td>${art.codigo}${estrella}</td>
+            <td>${art.descripcion}</td>
             <td>$${art.precio}</td>
         `
         tArt.appendChild(fila)
@@ -187,7 +201,7 @@ function ingresoVenta(){
     for (let i = 0; i < articulos.length; i++) {
         let opt = document.createElement("option")
         opt.value = articulos[i].codigo
-        opt.textContent = articulos[i].codigo + " - " + articulos[i].descripcion
+        opt.textContent = articulos[i].codigo
         selectArticulo.appendChild(opt)
     }
 
@@ -223,7 +237,7 @@ function agregarVenta(){
     guardarVentas()
 
     document.getElementById("cantidad-venta").value = ""
-    document.getElementById("tablaVenta").close()
+    document.getElementById("nro-venta").textContent = contadorVenta
 }
 
 function guardarVentas(){
@@ -244,9 +258,12 @@ function guardarVentas(){
     }
     guardarInfluencers()
     guardarArticulos()
+    dibujarGraficoBurbujas()
 }
 
 function eliminarVenta(numero) {
+    if (!confirm("¿Desea eliminar la venta?")) return
+
     let ventasSinEliminar = []
 
     for (let i = 0; i < ventas.length; i++) {
@@ -261,33 +278,86 @@ function eliminarVenta(numero) {
 
 guardarVentas()
 
+function aplicarSortInfluencers() {
+    if (!ordenInfluencersAsc) {
+        influencers.sort(function(a, b) { return a.nombre.localeCompare(b.nombre) })
+    } else {
+        influencers.sort(function(a, b) { return b.nombre.localeCompare(a.nombre) })
+    }
+}
+
+function aplicarSortArticulos() {
+    if (!ordenArticulosAsc) {
+        articulos.sort(function(a, b) { return a.codigo.localeCompare(b.codigo) })
+    } else {
+        articulos.sort(function(a, b) { return b.codigo.localeCompare(a.codigo) })
+    }
+}
+
 function ordenarInfluencers() {
+    sortInfluencersActivo = true
     if (ordenInfluencersAsc) {
         influencers.sort(function(a, b) {
             return a.nombre.localeCompare(b.nombre)
         })
-        document.getElementById("orden-influencers").textContent = "Nombre ↑"
     } else {
         influencers.sort(function(a, b) {
             return b.nombre.localeCompare(a.nombre)
         })
-        document.getElementById("orden-influencers").textContent = "Nombre ↓"
     }
     ordenInfluencersAsc = !ordenInfluencersAsc
     guardarInfluencers()
 }
 
+function dibujarGraficoBurbujas() {
+    let totales = [0, 0, 0, 0, 0, 0]
+    for (let i = 0; i < ventas.length; i++) {
+        let v = ventas[i]
+        let precio = 0
+        for (let j = 0; j < articulos.length; j++) {
+            if (articulos[j].codigo === v.codigoArticulo) { precio = articulos[j].precio; break }
+        }
+        if (v.medio === "1-Instagram") totales[0] += v.cantidad * precio
+        if (v.medio === "2-Youtube")   totales[1] += v.cantidad * precio
+        if (v.medio === "3-X")         totales[2] += v.cantidad * precio
+        if (v.medio === "4-TikTok")    totales[3] += v.cantidad * precio
+        if (v.medio === "5-Facebook")  totales[4] += v.cantidad * precio
+        if (v.medio === "6-Otras")     totales[5] += v.cantidad * precio
+    }
+
+    let maximo = 0
+    for (let i = 0; i < totales.length; i++) {
+        if (totales[i] > maximo) maximo = totales[i]
+    }
+
+    let nombres = ["1- Instagram", "2- Youtube", "3- X", "4- TikTok", "5- Facebook", "6- Otras"]
+    let colores = ["#E1306C", "#FF4040", "#1D9BF0", "#25C9C2", "#1877F2", "#9B59B6"]
+    let html = ""
+
+    for (let i = 0; i < totales.length; i++) {
+        let tamaño = maximo === 0 ? 100 : 10 + (totales[i] / maximo) * 90
+
+        html += "<div class='itemBurbuja'>" +
+            "<div class='burbuja' style='width:" + tamaño + "px; height:" + tamaño + "px; background-color:" + colores[i] + ";'>" +
+            + totales[i] +
+            "</div>" +
+            "<p>" + nombres[i] + "</p>" +
+            "</div>"
+    }
+
+    document.getElementById("graficoBurbujas").innerHTML = html
+}
+
 function ordenarArticulos() {
+    sortArticulosActivo = true
     if (ordenArticulosAsc) {
         articulos.sort(function(a, b) {
             return a.codigo.localeCompare(b.codigo)
         })
-        document.getElementById("orden-articulos").textContent = "Código ↑"
     } else {
         articulos.sort(function(a, b) {
             return b.codigo.localeCompare(a.codigo)
         })
-        document.getElementById("orden-articulos").textContent = "Código ↓"
     }
     ordenArticulosAsc = !ordenArticulosAsc
     guardarArticulos()

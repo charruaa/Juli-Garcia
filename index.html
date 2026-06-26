@@ -118,8 +118,12 @@
                 <input type="number" min="0" id="cantidad-venta">
                 <label>Medio:</label>
                 <select id="medio-venta">
-                    <option value="1-Instagram">1-Instagram</option>
-                    <option value="2-Youtube">2-Youtube</option>
+                    <option value="1-Instagram">1- Instagram</option>
+                    <option value="2-Youtube">2- Youtube</option>
+                    <option value="3-X">3- X</option>
+                    <option value="4-TikTok">4- TikTok</option>
+                    <option value="5-Facebook">5- Facebook</option>
+                    <option value="6-Otras">6- Otras</option>
                 </select>
                 <button type="button" id="cancelar-venta">Cancelar</button>
                 <button type="button" id="agregar-venta">Agregar</button>
@@ -128,7 +132,7 @@
         </dialog>
 
         <section>
-            <h3>Tabla de ventas (ordenada por número de venta)</h3>
+            <h3>Tabla de ventas</h3>
             <table>
                 <thead>
                     <tr>
@@ -147,6 +151,7 @@
 
         <section>
             <h3>Gráfico de burbujas</h3>
+            <div id="graficoBurbujas"></div>
         </section>
     </section>
 
