@@ -13,8 +13,8 @@ document.getElementById("agregar-venta").addEventListener("click",agregarVenta)
 document.getElementById("orden-influencers").addEventListener("click", ordenarInfluencers)
 document.getElementById("orden-articulos").addEventListener("click", ordenarArticulos)
 
-let ordenInfluencersAsc = true
-let ordenArticulosAsc = true
+let ordenInfluencersAsc = false
+let ordenArticulosAsc = false
 let sortInfluencersActivo = false
 let sortArticulosActivo = false
 
@@ -43,7 +43,7 @@ function agregarInfluencer(){
 
     let nuevoInfluencer = new influencer(nombre, mail, comision)
     influencers.push(nuevoInfluencer)
-    if (sortInfluencersActivo) aplicarSortInfluencers()
+    aplicarSortInfluencers()
     guardarInfluencers()
 
     document.getElementById("nombre-influencer").value = ""
