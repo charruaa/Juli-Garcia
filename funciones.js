@@ -33,16 +33,20 @@ function agregarInfluencer(){
         alert("Por favor completá todos los campos.")
         return
     }
+    if (comision>100){
+        alert("La comision no puede ser mayor a 100")
+        return
+    }
 
-    for (let i = 0; i < influencers.length; i++) {
-        if (influencers[i].nombre === nombre) {
+    for (let i = 0; i < miSistema.influencers.length; i++) {
+        if (miSistema.influencers[i].nombre === nombre) {
             alert("Ya existe un influencer con ese nombre.")
             return
         }
     }
 
-    let nuevoInfluencer = new influencer(nombre, mail, comision)
-    influencers.push(nuevoInfluencer)
+    let nuevoInfluencer = new miSistema.influencer(nombre, mail, comision)
+    miSistema.influencers.push(nuevoInfluencer)
     aplicarSortInfluencers()
     guardarInfluencers()
 
@@ -56,22 +60,22 @@ function guardarInfluencers(){
     tInf.innerHTML = ""
 
     let stats = {}
-    for (let i = 0; i < influencers.length; i++) {
-        stats[influencers[i].nombre] = { totalCobrar: 0, cantVentas: 0, ventaMaxMonto: 0 }
+    for (let i = 0; i < miSistema.influencers.length; i++) {
+        stats[miSistema.influencers[i].nombre] = { totalCobrar: 0, cantVentas: 0, ventaMaxMonto: 0 }
     }
 
-    for (let i = 0; i < ventas.length; i++) {
-        let v = ventas[i]
+    for (let i = 0; i < miSistema.ventas.length; i++) {
+        let v = miSistema.ventas[i]
         let art = null
-        for (let j = 0; j < articulos.length; j++) {
-            if (articulos[j].codigo === v.codigoArticulo) { 
-                art = articulos[j]; break 
+        for (let j = 0; j < miSistema.articulos.length; j++) {
+            if (miSistema.articulos[j].codigo === v.codigoArticulo) {
+                art = miSistema.articulos[j]; break
             }
         }
         let inf = null
-        for (let j = 0; j < influencers.length; j++) {
-            if (influencers[j].nombre === v.nombreInfluencer) { 
-                inf = influencers[j];
+        for (let j = 0; j < miSistema.influencers.length; j++) {
+            if (miSistema.influencers[j].nombre === v.nombreInfluencer) {
+                inf = miSistema.influencers[j];
                 break
                 }
         }
@@ -90,14 +94,13 @@ function guardarInfluencers(){
         if (stats[nombre].ventaMaxMonto > maxMonto) maxMonto = stats[nombre].ventaMaxMonto
     }
 
-    for(let i = 0; i < influencers.length; i++){
-        let inf = influencers[i]
+    for(let i = 0; i < miSistema.influencers.length; i++){
+        let inf = miSistema.influencers[i]
         let s = stats[inf.nombre]
         let etiquetas = ""
         if (maxCobrar > 0 && s.totalCobrar === maxCobrar) etiquetas += "🔥"
         if (s.cantVentas === 0) etiquetas += "🧊"
         if (maxMonto > 0 && s.ventaMaxMonto === maxMonto) etiquetas += "🟢"
-
         let fila = document.createElement("tr")
         fila.innerHTML = `
             <td>${inf.nombre}</td>
@@ -112,17 +115,19 @@ function guardarInfluencers(){
 }
 function ventasInfluencer(nombre){
     let inf = null
-    for (let j = 0; j < influencers.length; j++) {
-        if (influencers[j].nombre === nombre) { inf = influencers[j]; break }
+    for (let j = 0; j < miSistema.influencers.length; j++) {
+        if (miSistema.influencers[j].nombre === nombre) {
+            inf = miSistema.influencers[j]; break 
+        }
     }
 
     let ventasIndividuales = "Ventas:"
-    for (let i = 0; i < ventas.length; i++){
-        let v = ventas[i]
+    for (let i = 0; i < miSistema.ventas.length; i++){
+        let v = miSistema.ventas[i]
         if (v.nombreInfluencer === nombre){
             let art = null
-            for (let j = 0; j < articulos.length; j++) {
-                if (articulos[j].codigo === v.codigoArticulo) { art = articulos[j]; break }
+            for (let j = 0; j < miSistema.articulos.length; j++) {
+                if (miSistema.articulos[j].codigo === v.codigoArticulo) { art = miSistema.articulos[j]; break }
             }
             let precio = art ? art.precio : 0
             let totalPlata = v.cantidad * precio
@@ -151,15 +156,15 @@ function agregarArticulo(){
         return
     }
 
-    for (let i = 0; i < articulos.length; i++) {
-        if (articulos[i].codigo === codigo) {
+    for (let i = 0; i < miSistema.articulos.length; i++) {
+        if (miSistema.articulos[i].codigo === codigo) {
             alert("Ya existe un artículo con ese código.")
             return
         }
     }
 
-    let nuevoArticulo = new articulo(codigo, descripcion, precio)
-    articulos.push(nuevoArticulo)
+    let nuevoArticulo = new miSistema.articulo(codigo, descripcion, precio)
+    miSistema.articulos.push(nuevoArticulo)
     if (sortArticulosActivo) aplicarSortArticulos()
     guardarArticulos()
 
@@ -172,10 +177,10 @@ function guardarArticulos(){
     tArt.innerHTML = ""
 
     let unidades = {}
-    for (let i = 0; i < articulos.length; i++) unidades[articulos[i].codigo] = 0
-    for (let i = 0; i < ventas.length; i++) {
-        if (unidades[ventas[i].codigoArticulo] !== undefined)
-            unidades[ventas[i].codigoArticulo] += ventas[i].cantidad
+    for (let i = 0; i < miSistema.articulos.length; i++) unidades[miSistema.articulos[i].codigo] = 0
+    for (let i = 0; i < miSistema.ventas.length; i++) {
+        if (unidades[miSistema.ventas[i].codigoArticulo] !== undefined)
+            unidades[miSistema.ventas[i].codigoArticulo] += miSistema.ventas[i].cantidad
     }
 
     let maxUnidades = 0
@@ -183,8 +188,8 @@ function guardarArticulos(){
         if (unidades[codigo] > maxUnidades) maxUnidades = unidades[codigo]
     }
 
-    for(let i = 0; i < articulos.length; i++){
-        let art = articulos[i]
+    for(let i = 0; i < miSistema.articulos.length; i++){
+        let art = miSistema.articulos[i]
         let estrella = (maxUnidades > 0 && unidades[art.codigo] === maxUnidades) ? " ⭐" : ""
         let fila = document.createElement("tr")
         fila.innerHTML = `
@@ -198,23 +203,23 @@ function guardarArticulos(){
 function ingresoVenta(){
     let selectArticulo = document.getElementById("articulo-venta")
     selectArticulo.innerHTML = ""
-    for (let i = 0; i < articulos.length; i++) {
+    for (let i = 0; i < miSistema.articulos.length; i++) {
         let opt = document.createElement("option")
-        opt.value = articulos[i].codigo
-        opt.textContent = articulos[i].codigo
+        opt.value = miSistema.articulos[i].codigo
+        opt.textContent = miSistema.articulos[i].codigo
         selectArticulo.appendChild(opt)
     }
 
     let selectInfluencer = document.getElementById("influencer-venta")
     selectInfluencer.innerHTML = ""
-    for (let i = 0; i < influencers.length; i++) {
+    for (let i = 0; i < miSistema.influencers.length; i++) {
         let opt = document.createElement("option")
-        opt.value = influencers[i].nombre
-        opt.textContent = influencers[i].nombre
+        opt.value = miSistema.influencers[i].nombre
+        opt.textContent = miSistema.influencers[i].nombre
         selectInfluencer.appendChild(opt)
     }
 
-    document.getElementById("nro-venta").textContent = contadorVenta
+    document.getElementById("nro-venta").textContent = miSistema.contadorVenta
     document.getElementById("tablaVenta").showModal()
 }
 function cerrarVenta(){
@@ -231,20 +236,20 @@ function agregarVenta(){
         return
     }
 
-    let nuevaVenta = new venta(contadorVenta, codigoArticulo, nombreInfluencer, cantidad, medio)
-    ventas.push(nuevaVenta)
-    contadorVenta++
+    let nuevaVenta = new miSistema.venta(miSistema.contadorVenta, codigoArticulo, nombreInfluencer, cantidad, medio)
+    miSistema.ventas.push(nuevaVenta)
+    miSistema.contadorVenta++
     guardarVentas()
 
     document.getElementById("cantidad-venta").value = ""
-    document.getElementById("nro-venta").textContent = contadorVenta
+    document.getElementById("nro-venta").textContent = miSistema.contadorVenta
 }
 
 function guardarVentas(){
     let tVen = document.getElementById("ventasTabla")
     tVen.innerHTML = ""
-    for(let i = 0; i < ventas.length; i++){
-        let v = ventas[i]
+    for(let i = 0; i < miSistema.ventas.length; i++){
+        let v = miSistema.ventas[i]
         let fila = document.createElement("tr")
         fila.innerHTML = `
             <td>${v.numero}</td>
@@ -266,13 +271,13 @@ function eliminarVenta(numero) {
 
     let ventasSinEliminar = []
 
-    for (let i = 0; i < ventas.length; i++) {
-        if (ventas[i].numero !== numero) {
-            ventasSinEliminar.push(ventas[i])
+    for (let i = 0; i < miSistema.ventas.length; i++) {
+        if (miSistema.ventas[i].numero !== numero) {
+            ventasSinEliminar.push(miSistema.ventas[i])
         }
     }
 
-    ventas = ventasSinEliminar
+    miSistema.ventas = ventasSinEliminar
     guardarVentas()
 }
 
@@ -280,28 +285,28 @@ guardarVentas()
 
 function aplicarSortInfluencers() {
     if (!ordenInfluencersAsc) {
-        influencers.sort(function(a, b) { return a.nombre.localeCompare(b.nombre) })
+        miSistema.influencers.sort(function(a, b) { return a.nombre.localeCompare(b.nombre) })
     } else {
-        influencers.sort(function(a, b) { return b.nombre.localeCompare(a.nombre) })
+        miSistema.influencers.sort(function(a, b) { return b.nombre.localeCompare(a.nombre) })
     }
 }
 
 function aplicarSortArticulos() {
     if (!ordenArticulosAsc) {
-        articulos.sort(function(a, b) { return a.codigo.localeCompare(b.codigo) })
+        miSistema.articulos.sort(function(a, b) { return a.codigo.localeCompare(b.codigo) })
     } else {
-        articulos.sort(function(a, b) { return b.codigo.localeCompare(a.codigo) })
+        miSistema.articulos.sort(function(a, b) { return b.codigo.localeCompare(a.codigo) })
     }
 }
 
 function ordenarInfluencers() {
     sortInfluencersActivo = true
     if (ordenInfluencersAsc) {
-        influencers.sort(function(a, b) {
+        miSistema.influencers.sort(function(a, b) {
             return a.nombre.localeCompare(b.nombre)
         })
     } else {
-        influencers.sort(function(a, b) {
+        miSistema.influencers.sort(function(a, b) {
             return b.nombre.localeCompare(a.nombre)
         })
     }
@@ -311,11 +316,11 @@ function ordenarInfluencers() {
 
 function dibujarGraficoBurbujas() {
     let totales = [0, 0, 0, 0, 0, 0]
-    for (let i = 0; i < ventas.length; i++) {
-        let v = ventas[i]
+    for (let i = 0; i < miSistema.ventas.length; i++) {
+        let v = miSistema.ventas[i]
         let precio = 0
-        for (let j = 0; j < articulos.length; j++) {
-            if (articulos[j].codigo === v.codigoArticulo) { precio = articulos[j].precio; break }
+        for (let j = 0; j < miSistema.articulos.length; j++) {
+            if (miSistema.articulos[j].codigo === v.codigoArticulo) { precio = miSistema.articulos[j].precio; break }
         }
         if (v.medio === "1-Instagram") totales[0] += v.cantidad * precio
         if (v.medio === "2-Youtube")   totales[1] += v.cantidad * precio
@@ -351,11 +356,11 @@ function dibujarGraficoBurbujas() {
 function ordenarArticulos() {
     sortArticulosActivo = true
     if (ordenArticulosAsc) {
-        articulos.sort(function(a, b) {
+        miSistema.articulos.sort(function(a, b) {
             return a.codigo.localeCompare(b.codigo)
         })
     } else {
-        articulos.sort(function(a, b) {
+        miSistema.articulos.sort(function(a, b) {
             return b.codigo.localeCompare(a.codigo)
         })
     }

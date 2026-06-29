@@ -80,8 +80,12 @@ section.grupo > h2 {
     margin-left: 50px;
 }
 
-dialog{
-    border-radius: 12px
+dialog {
+    border-radius: 12px;
+}
+
+dialog::backdrop {
+    background-color: #11101080;
 }
 
 #graficoBurbujas {
