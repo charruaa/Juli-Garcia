@@ -33,8 +33,8 @@ function agregarInfluencer(){
         alert("Por favor completá todos los campos.")
         return
     }
-    if (comision>100){
-        alert("La comision no puede ser mayor a 100")
+    if (comision>100||comision<0){
+        alert("La comision no puede ser mayor a 100/negativo")
         return
     }
 
@@ -83,7 +83,9 @@ function guardarInfluencers(){
             let monto = v.cantidad * art.precio
             stats[inf.nombre].totalCobrar += monto * inf.comision / 100
             stats[inf.nombre].cantVentas++
-            if (monto > stats[inf.nombre].ventaMaxMonto) stats[inf.nombre].ventaMaxMonto = monto
+            if (monto > stats[inf.nombre].ventaMaxMonto) {
+                stats[inf.nombre].ventaMaxMonto = monto
+            }
         }
     }
 
@@ -127,12 +129,14 @@ function ventasInfluencer(nombre){
         if (v.nombreInfluencer === nombre){
             let art = null
             for (let j = 0; j < miSistema.articulos.length; j++) {
-                if (miSistema.articulos[j].codigo === v.codigoArticulo) { art = miSistema.articulos[j]; break }
+                if (miSistema.articulos[j].codigo === v.codigoArticulo) {
+                     art = miSistema.articulos[j]; break 
+                }
             }
             let precio = art ? art.precio : 0
             let totalPlata = v.cantidad * precio
             let comision = inf ? inf.comision : 0
-            ventasIndividuales += `\nNro ${v.numero} → ${v.cantidad} → ${v.codigoArticulo} → $${precio}c/u  Total: $${totalPlata.toFixed(2)} → Comisión: $${(totalPlata * comision / 100).toFixed(2)}`
+            ventasIndividuales += `\nNro ${v.numero} → ${v.cantidad} → ${v.codigoArticulo} → $${precio}c/u  Total $${totalPlata} → Comisión $${(totalPlata * comision / 100)}`
         }
     }
 
